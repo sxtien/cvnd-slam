@@ -76,9 +76,7 @@ class robot:
             This function should account for measurement_noise and measurement_range.
             One item in the returned list should be in the form: [landmark_index, dx, dy].
             '''
-           
-        measurements = []
-        
+ 
         ## TODO: iterate through all of the landmarks in a world
         
         ## TODO: For each landmark
@@ -91,6 +89,13 @@ class robot:
         ##    as list.append([index, dx, dy]), this format is important for data creation done later
         
         ## TODO: return the final, complete list of measurements
+        measurements = []
+        for i in range(len(self.landmarks)):
+            dx = self.x - self.landmarks[i][0] + self.rand() * measurement_noise
+            dy = self.y - self.landmarks[i][1] + self.rand()  * measurement_noise
+            if (measurement_range == -1) or ((dx < measurement_range) and (dy < measurement_range)):
+                measurements.append([i, dx, dy])
+        
         return measurements
 
 
